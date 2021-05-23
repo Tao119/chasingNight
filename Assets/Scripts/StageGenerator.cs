@@ -7,30 +7,35 @@ public class StageGenerator : MonoBehaviour
 
    
     int len;
-    float squareScale;
-
-    public GameObject[,] stageObject;
+    public static float squareScale;
+    
+    public static GameObject[,] stageObject;
     public GameObject[] GObject;
+
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start(){
         
         string[] stageLayout ={
-            "00000000",
-            "01111110",
-            "01000010",
-            "01101110",
-            "00101010",
-            "01111010",
-            "01001110",
-            "00000000"
+            "000    ",
+            "010000 ",
+            "011110 ",
+            "010010 ",
+            "0100100",
+            "0111110",
+            "0000000"
         };
         stageObject = new GameObject[stageLayout.GetLength(0), stageLayout[0].Length];
 
+       
 
         len = Mathf.Max(stageLayout.GetLength(0), stageLayout[0].Length);
         squareScale = 10.0f / len;
 
+        Instantiate(player, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
+        player.transform.localScale = new Vector3(squareScale, squareScale, 0);
+    
 
 
 
@@ -40,15 +45,19 @@ public class StageGenerator : MonoBehaviour
             {
                 switch (stageLayout[i].Substring(j, 1))
                 {
+                    case " ":
+                        break;
                     case "0":
-                        stageObject[i,j] =Instantiate(GObject[0], new Vector3(i * squareScale, j * squareScale, 0), Quaternion.identity)as GameObject;
+                        stageObject[i,j] =Instantiate(GObject[0], new Vector3(-j * squareScale, -i * squareScale, -10), Quaternion.identity)as GameObject;
                         break;
                     case "1":
-                        stageObject[i,j] = Instantiate(GObject[1], new Vector3(i * squareScale, j * squareScale, 0), Quaternion.identity) as GameObject;
+                        stageObject[i,j] = Instantiate(GObject[1], new Vector3(-j * squareScale, -i * squareScale, 0), Quaternion.identity) as GameObject;
                         break;
+
                 }
-                
-                 stageObject[i,j].transform.localScale = new Vector3(squareScale,squareScale,0);
+                if (stageLayout[i].Substring(j, 1)!=" ") {
+                    stageObject[i, j].transform.localScale = new Vector3(squareScale, squareScale, 0);
+                }
             }
         }
 
