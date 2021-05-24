@@ -4,41 +4,34 @@ using UnityEngine;
 
 public class LightGenerator : MonoBehaviour
 {
-    int a;
-    public GameObject player;
-    Rigidbody2D playerbody;
     // Start is called before the first frame update
     void Start()
     {
-        a = PlayerScript.direction;
-        playerbody = player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (a == 0)
+        switch (PlayerScript.direction)
         {
-            transform.position += new Vector3(10*Time.deltaTime + playerbody.velocity.x, 0, 0);
-        }
-        else if (a == 1)
-        {
-            transform.position += new Vector3(-10*Time.deltaTime + playerbody.velocity.x, 0, 0);
-        }
-        else if (a == 2)
-        {
-            transform.position += new Vector3(0, 10*Time.deltaTime + playerbody.velocity.y, 0);
-        }
-        else if (a == 3)
-        {
-            transform.position += new Vector3(0, -10*Time.deltaTime + playerbody.velocity.y, 0);
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag=="wall")
-        {
-            Destroy(this.gameObject);
+            case 0:
+                transform.position = new Vector3(-PlayerScript.px + (((float)PlayerScript.lightLength + 1) / 2), -PlayerScript.py, -10) * StageGenerator.squareScale;
+                transform.localScale = new Vector3(PlayerScript.lightLength, 1, 0) * StageGenerator.squareScale;
+                break;
+            case 1:
+                transform.position = new Vector3(-PlayerScript.px - (((float)PlayerScript.lightLength + 1) / 2), -PlayerScript.py, -10) * StageGenerator.squareScale;
+                transform.localScale = new Vector3(PlayerScript.lightLength, 1, 0) * StageGenerator.squareScale;
+                break;
+            case 2:
+                transform.position = new Vector3(-PlayerScript.px, ((float)PlayerScript.lightLength+1)/2- PlayerScript.py, -10) * StageGenerator.squareScale;
+                transform.localScale = new Vector3(1, PlayerScript.lightLength, 0) * StageGenerator.squareScale;
+                break;
+            case 3:
+                transform.position = new Vector3(-PlayerScript.px, -(((float)PlayerScript.lightLength + 1) / 2) - PlayerScript.py, -10) * StageGenerator.squareScale;
+                transform.localScale = new Vector3(1, PlayerScript.lightLength, 0) * StageGenerator.squareScale;
+                break;
+
         }
     }
+    
 }

@@ -9,8 +9,11 @@ public class StageGenerator : MonoBehaviour
     int len;
     public static float squareScale;
     
-    public static GameObject[,] stageObject;
+    GameObject[,] stageObject;
+    public static int[,] location;
     public GameObject[] GObject;
+
+    public static int lengthx;
 
     public GameObject player;
 
@@ -27,8 +30,9 @@ public class StageGenerator : MonoBehaviour
             "0000000"
         };
         stageObject = new GameObject[stageLayout.GetLength(0), stageLayout[0].Length];
+        location = new int[stageLayout.GetLength(0), stageLayout[0].Length];
 
-       
+        lengthx = stageLayout.GetLength(0);
 
         len = Mathf.Max(stageLayout.GetLength(0), stageLayout[0].Length);
         squareScale = 10.0f / len;
@@ -48,9 +52,11 @@ public class StageGenerator : MonoBehaviour
                     case " ":
                         break;
                     case "0":
+                        location[i, j] = 0;
                         stageObject[i,j] =Instantiate(GObject[0], new Vector3(-j * squareScale, -i * squareScale, -10), Quaternion.identity)as GameObject;
                         break;
                     case "1":
+                        location[i, j] = 1;
                         stageObject[i,j] = Instantiate(GObject[1], new Vector3(-j * squareScale, -i * squareScale, 0), Quaternion.identity) as GameObject;
                         break;
 

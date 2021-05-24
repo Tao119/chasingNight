@@ -8,27 +8,24 @@ public class PlayerScript : MonoBehaviour
     public float speed = 2.0f;
     public static int direction=3;
 
-    float timer;
-    float interval = 0.0002f;
 
-    public GameObject lightPart;
+    public GameObject lightObject;
+    public static int lightLength;
 
+    int playerx, playery;
+    public static int px, py;
     // Start is called before the first frame update
     void Start()
     {
-        
-        
+        Instantiate(lightObject,Vector3.zero,Quaternion.identity);
+    
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        
-    
-}
-    private void FixedUpdate()
-    {
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
@@ -50,24 +47,42 @@ public class PlayerScript : MonoBehaviour
             transform.position += new Vector3(0, -speed, 0) * Time.deltaTime;
             direction = 3;
         }
-        timer += Time.deltaTime;
-        if (timer >= interval)
+
+        playerx = -Mathf.RoundToInt(transform.position.x / StageGenerator.squareScale);
+        playery = -Mathf.RoundToInt(transform.position.y / StageGenerator.squareScale);
+        px = playerx;
+        py = playery;
+
+        //Debug.Log(playerx + "," + playery);
+        lightLength = -1;
+        
+        while (StageGenerator.location[playery, playerx] == 1)
         {
-            Vector3 v = new Vector3(Mathf.RoundToInt(this.gameObject.transform.position.x / StageGenerator.squareScale), Mathf.RoundToInt(this.gameObject.transform.position.y / StageGenerator.squareScale), Mathf.RoundToInt(this.gameObject.transform.position.z / StageGenerator.squareScale));
-            Vector3 correctedPosition = v * StageGenerator.squareScale;
-            if(direction>=2)
+
+            switch (direction)
             {
-                timer = 0;
-                Instantiate(lightPart,correctedPosition , Quaternion.identity);
-                lightPart.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale / 10, 0);
+                case 0:
+                    playerx--;
+                    break;
+                case 1:
+                    playerx++;
+                    break;
+                case 2:
+                    playery--;
+                    break;
+                case 3:
+                    playery++;
+                    break;
+
             }
-            else
-            {
-                timer = 0;
-                Instantiate(lightPart, correctedPosition, Quaternion.identity);
-                lightPart.transform.localScale = new Vector3(StageGenerator.squareScale / 10, StageGenerator.squareScale, 0);
-            }
+            lightLength++;
+
         }
+       // Debug.Log(lightLength);
+
+
+        
+        
     }
 
 }

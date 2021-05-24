@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  lightPart: {fileID: 7309146892885887938, guid: 2efc092aaa01a4c6a84cc828c9a168bb, type: 3}
+  lightObject: {fileID: 7309146892885887938, guid: 2efc092aaa01a4c6a84cc828c9a168bb, type: 3}
