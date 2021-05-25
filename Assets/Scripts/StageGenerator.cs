@@ -12,11 +12,14 @@ public class StageGenerator : MonoBehaviour
     GameObject[,] stageObject;
     public static int[,] location;
     public GameObject[] GObject;
+    public GameObject enemyGenerator;
 
-    public static int lengthx;
+    public static int lengthx,lengthy;
 
     public GameObject player;
     public GameObject enemy;
+
+    public static int floorNumber = 0;
 
 
     // Start is called before the first frame update
@@ -25,20 +28,24 @@ public class StageGenerator : MonoBehaviour
         string[] stageLayout ={
             "0000000000000",
             "0111111111110",
-            "0101010101000",
-            "0101010101000",
-            "0111111111100",
+            "0101010101010",
+            "0111010101110",
+            "0101111111010",
+            "0111010101110",
+            "0101010101010",
+            "0111111111110",
             "0000000000000"
         };
         stageObject = new GameObject[stageLayout.GetLength(0), stageLayout[0].Length];
         location = new int[stageLayout.GetLength(0), stageLayout[0].Length];
+   
+        lengthy = stageLayout.GetLength(0);
+        lengthx = stageLayout[0].Length;
 
-        lengthx = stageLayout.GetLength(0);
 
         len = Mathf.Max(stageLayout.GetLength(0), stageLayout[0].Length);
         squareScale = 10.0f / len;
 
-        Debug.Log(squareScale);
 
         Instantiate(player, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
         player.transform.localScale = new Vector3(squareScale, squareScale, 0);
@@ -64,6 +71,7 @@ public class StageGenerator : MonoBehaviour
                     case "1":
                         location[i, j] = 1;
                         stageObject[i,j] = Instantiate(GObject[1], new Vector3(-j * squareScale, -i * squareScale, 0), Quaternion.identity) as GameObject;
+                        floorNumber++;
                         break;
 
                 }
@@ -73,8 +81,7 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
-        enemyGenerate();
-        
+        enemyGenerator.SendMessage("countFloor");
     }
 
     // Update is called once per frame
@@ -82,10 +89,5 @@ public class StageGenerator : MonoBehaviour
     {
         
     }
-    void enemyGenerate()
-    {
-        Instantiate(enemy, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
-        enemy.transform.position = new Vector3(-squareScale, -squareScale, -10);
-        enemy.transform.localScale = new Vector3(squareScale, squareScale, 0);
-    }
+    
 }

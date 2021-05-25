@@ -13,7 +13,6 @@ public class EnemyScript : MonoBehaviour
     public float speed = 2.0f;
 
     int enemyx, enemyy;
-    int enemyx1, enemyy1;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,10 +49,6 @@ public class EnemyScript : MonoBehaviour
 
 
         
-
-        enemyx1 = enemyx;
-        enemyy1 = enemyy;
-
 
 
     }
@@ -141,5 +136,28 @@ public class EnemyScript : MonoBehaviour
         int randomNumber = Random.Range(0, directionOptionNumber);
         direction = directionOption[randomNumber];
         //Debug.Log(direction+","+directionOptionNumber);
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.SendMessage("damaged");
+            Destroy(this.gameObject);
+        } 
+    }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "light")
+        {
+            if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0))
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else
+        {
+
+        }
     }
 }

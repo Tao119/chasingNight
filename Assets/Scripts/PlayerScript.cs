@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static int playerHP = 5;
     public float speed = 2.0f;
     public static int direction=3;
 
@@ -78,11 +79,19 @@ public class PlayerScript : MonoBehaviour
             lightLength++;
 
         }
-       // Debug.Log(lightLength);
+        // Debug.Log(lightLength);
 
 
-        
-        
+
+        if (playerHP <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            playerHP = 5;
+        }
+    }
+    public void damaged()
+    {
+        playerHP--;
     }
 
 }
