@@ -269,6 +269,7 @@ MonoBehaviour:
   - {fileID: 108630444192860091, guid: 57f4a15d8536342e8a5bbcb8746baac1, type: 3}
   - {fileID: 1347055337540680868, guid: cd5e315c5cde94a588e65648b12db90e, type: 3}
   player: {fileID: 7246029235040882115, guid: 22ed0f869321d48d0bdbede361a23d04, type: 3}
+  enemy: {fileID: 4990894718352901461, guid: ed95199dfb4ab410b963bb992d97f14f, type: 3}
 --- !u!4 &1476441183
 Transform:
   m_ObjectHideFlags: 0

@@ -16,18 +16,19 @@ public class StageGenerator : MonoBehaviour
     public static int lengthx;
 
     public GameObject player;
+    public GameObject enemy;
+
 
     // Start is called before the first frame update
-    void Start(){
-        
+    void Start() {
+
         string[] stageLayout ={
-            "000    ",
-            "010000 ",
-            "011110 ",
-            "010010 ",
-            "0100100",
-            "0111110",
-            "0000000"
+            "0000000000000",
+            "0111111111110",
+            "0101010101000",
+            "0101010101000",
+            "0111111111100",
+            "0000000000000"
         };
         stageObject = new GameObject[stageLayout.GetLength(0), stageLayout[0].Length];
         location = new int[stageLayout.GetLength(0), stageLayout[0].Length];
@@ -37,9 +38,14 @@ public class StageGenerator : MonoBehaviour
         len = Mathf.Max(stageLayout.GetLength(0), stageLayout[0].Length);
         squareScale = 10.0f / len;
 
+        Debug.Log(squareScale);
+
         Instantiate(player, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
         player.transform.localScale = new Vector3(squareScale, squareScale, 0);
-    
+
+
+       
+
 
 
 
@@ -67,8 +73,7 @@ public class StageGenerator : MonoBehaviour
             }
         }
 
-
-
+        enemyGenerate();
         
     }
 
@@ -76,5 +81,11 @@ public class StageGenerator : MonoBehaviour
     void Update()
     {
         
+    }
+    void enemyGenerate()
+    {
+        Instantiate(enemy, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
+        enemy.transform.position = new Vector3(-squareScale, -squareScale, -10);
+        enemy.transform.localScale = new Vector3(squareScale, squareScale, 0);
     }
 }
