@@ -12,10 +12,13 @@ public class EnemyGenerator : MonoBehaviour
     int count;
     int randomNum;
 
+    public static bool[,] isLighted;
+
     // Start is called before the first frame update
     void Start()
     {
-        timer = interval;
+        timer = 0;
+        
     }
 
     // Update is called once per frame
@@ -29,12 +32,13 @@ public class EnemyGenerator : MonoBehaviour
             {
                 if (StageGenerator.location[i,j]==1)
                 {
-                   // if (LightGenerator.isLighted[i, j] == false)
-                  //  {
+                    if (isLighted[i, j] == false)
+                    {
                         spawnableLocation[Num] = new Vector3(-j, -i, 0) * StageGenerator.squareScale + new Vector3(0, 0, -10);
-                   // }
-                    Num++;
-                    count++;
+
+                        Num++;
+                        count++;
+                    }
                 }
             }
         }
@@ -44,6 +48,7 @@ public class EnemyGenerator : MonoBehaviour
         { 
             Spawn(); 
             timer = interval;
+           // Debug.Log(isLighted[1,1]+","+isLighted[StageGenerator.lengthy-2, StageGenerator.lengthx-2]);
         }
             
 
@@ -52,12 +57,27 @@ public class EnemyGenerator : MonoBehaviour
     }
     void Spawn()
     {
-        randomNum = Random.Range(0,count);
-        Instantiate(enemy, spawnableLocation[randomNum], Quaternion.identity);
-        enemy.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
+        if (count>0) {
+            randomNum = Random.Range(0, count);
+            Instantiate(enemy, spawnableLocation[randomNum], Quaternion.identity);
+            // Debug.Log(spawnableLocation[randomNum]);
+            enemy.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
+            PlayerScript.enemyObjectnumber++;
+        }
     }
     public void countFloor()
     {
           spawnableLocation = new Vector3[StageGenerator.floorNumber];
+    }
+    void setting()
+    {
+        isLighted = new bool[StageGenerator.lengthy, StageGenerator.lengthx];
+        for (int i = 0; i < StageGenerator.lengthy; i++)
+        {
+            for (int j = 0; j < StageGenerator.lengthx; j++)
+            {
+                isLighted[i, j] = false;
+            }
+        }
     }
 }

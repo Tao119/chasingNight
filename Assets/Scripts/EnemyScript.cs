@@ -10,9 +10,10 @@ public class EnemyScript : MonoBehaviour
 
     float timer;
 
-    public float speed = 2.0f;
+    public float speed = 2.5f;
 
     int enemyx, enemyy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +48,13 @@ public class EnemyScript : MonoBehaviour
             transform.position += new Vector3(0, -speed, 0) * Time.deltaTime;
         }
 
+        if (transform.position.x >= 0 || transform.position.x <= -10 || transform.position.y <= -10 || transform.position.y >= 0)
+        {
+            Destroy(this.gameObject);
+            PlayerScript.enemyObjectnumber--;
+        }
 
-        
+
 
 
     }
@@ -108,6 +114,10 @@ public class EnemyScript : MonoBehaviour
         int randomNumber = Random.Range(0,directionOptionNumber);
         direction = directionOption[randomNumber];
 
+
+
+
+        
     }
 
     public void startDirection()
@@ -143,21 +153,20 @@ public class EnemyScript : MonoBehaviour
         {
             other.SendMessage("damaged");
             Destroy(this.gameObject);
+            PlayerScript.enemyObjectnumber--;
         } 
     }
     void OnTriggerStay2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "light")
+        if (collision.gameObject.name == "light(Clone)")
         {
-            if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0))
+            if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0) && PlayerScript.isPlaying==true)
             {
                 Destroy(this.gameObject);
+                //collision.gameObject.SendMessage("pause",1.0f);
+                PlayerScript.enemyObjectnumber--;
             }
-        }
-        else
-        {
-
         }
     }
 }

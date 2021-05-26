@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 0c209f85183d64788b5c84db8fffc344, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -144,6 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b095c470524e46cf8550451b91dc3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 5
   speed: 2
+  damagedText: {fileID: 5616560635844413754, guid: 68635154a33514072a25c74488fea756, type: 3}
+  isPlaying: 0
+  lightedCount: 0
   lightObject: {fileID: 7309146892885887938, guid: 2efc092aaa01a4c6a84cc828c9a168bb, type: 3}
+  lightObject1: {fileID: 6754354047451229561, guid: ac9580d34db2147a39642c93c0acc52b, type: 3}
+  OnSwitch: {fileID: 1969343134081803793, guid: 4fa6acb9dd00b4e0da4bee71a50416be, type: 3}
