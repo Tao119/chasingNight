@@ -11,8 +11,11 @@ public class EnemyGenerator : MonoBehaviour
     int Num = 0;
     int count;
     int randomNum;
+    Transform parent;
 
     public static bool[,] isLighted;
+    public GameObject spawnMark;
+    public GameObject spawnMark1;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +63,8 @@ public class EnemyGenerator : MonoBehaviour
         if (count>0) {
             randomNum = Random.Range(0, count);
             Instantiate(enemy, spawnableLocation[randomNum], Quaternion.identity);
+            spawnMark1= Instantiate(spawnMark, spawnableLocation[randomNum], Quaternion.identity)as GameObject;
+            Invoke("removeMark",1.5f);
             // Debug.Log(spawnableLocation[randomNum]);
             enemy.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             PlayerScript.enemyObjectnumber++;
@@ -79,5 +84,9 @@ public class EnemyGenerator : MonoBehaviour
                 isLighted[i, j] = false;
             }
         }
+    }
+    void removeMark()
+    {
+        Destroy(spawnMark1);
     }
 }

@@ -9,8 +9,9 @@ public class EnemyScript : MonoBehaviour
     int directionOptionNumber=0;
 
     float timer;
-
+    float speedTimer;
     public float speed = 2.5f;
+    Animator animator;
 
     int enemyx, enemyy;
 
@@ -22,30 +23,46 @@ public class EnemyScript : MonoBehaviour
         enemyy = -Mathf.RoundToInt(transform.position.y / StageGenerator.squareScale);
         directionOption = new int[4];
         directionOptionNumber = 0;
+        speedTimer = 0;
         startDirection();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        speedTimer += Time.deltaTime;
+        if (timer >= 15)
+        {
+            speed *= 1.1f;
+            speedTimer = 0;
+        }
         //Debug.Log(enemyx+","+enemyy);
         enemyx = -Mathf.RoundToInt(transform.position.x / StageGenerator.squareScale);
         enemyy = -Mathf.RoundToInt(transform.position.y / StageGenerator.squareScale);
         if (direction==0)
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            animator.SetInteger("x", 1);
+            animator.SetInteger("y", 0);
         }
         else if (direction==1)
         {
             transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
+            animator.SetInteger("x", -1);
+            animator.SetInteger("y", 0);
         }
         else if (direction==2)
         {
             transform.position += new Vector3(0, speed, 0) * Time.deltaTime;
+            animator.SetInteger("x", 0);
+            animator.SetInteger("y", 1);
         }
         else if (direction==3)
         {
             transform.position += new Vector3(0, -speed, 0) * Time.deltaTime;
+            animator.SetInteger("x", 0);
+            animator.SetInteger("y", -1);
         }
 
         if (transform.position.x >= 0 || transform.position.x <= -10 || transform.position.y <= -10 || transform.position.y >= 0)
@@ -117,7 +134,8 @@ public class EnemyScript : MonoBehaviour
 
 
 
-        
+
+
     }
 
     public void startDirection()
@@ -145,6 +163,8 @@ public class EnemyScript : MonoBehaviour
         }
         int randomNumber = Random.Range(0, directionOptionNumber);
         direction = directionOption[randomNumber];
+
+        animator.SetInteger("direction", directionOption[randomNumber]);
         //Debug.Log(direction+","+directionOptionNumber);
     }
     void OnTriggerEnter2D(Collider2D other)
