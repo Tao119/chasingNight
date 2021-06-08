@@ -13,8 +13,6 @@ public class PlayerScript : MonoBehaviour
     public static int direction = 3;
 
 
-    public Text damagedText;
-
     public static bool isPlaying;
 
     public int lightedCount=0;
@@ -43,8 +41,6 @@ public class PlayerScript : MonoBehaviour
         lightedCount = 0;
         Instantiate(lightObject, Vector3.zero, Quaternion.identity);
         isPlaying = true;
-        Instantiate(damagedText,Vector3.zero,Quaternion.identity);
-        damagedText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -124,10 +120,11 @@ public class PlayerScript : MonoBehaviour
     public void damaged()
     {
         damageAnimation1 = Instantiate(damageAnimation, transform.position, Quaternion.identity) as GameObject;
+        damageAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
+
         Invoke("removeAnimation", 0.5f);
         playerHP--;
         pause(1.0f);
-        dText();
 
     }
 
@@ -141,7 +138,9 @@ public class PlayerScript : MonoBehaviour
                 if (Input.GetMouseButton(0)) {
                     if (collision.gameObject.transform.position == (-1 * StageGenerator.lightSwitch[i] * StageGenerator.squareScale + new Vector3(0, 0, -10)))
                     {
-                        Instantiate(OnSwitch, collision.gameObject.transform.position, Quaternion.identity);
+                        GameObject Onswitch1= Instantiate(OnSwitch, collision.gameObject.transform.position, Quaternion.identity)as GameObject;
+                       
+                        Onswitch1.transform.localScale = new Vector3(StageGenerator.squareScale / 2,StageGenerator.squareScale / 2, 0);
                         Destroy(collision.gameObject);
                         lightObject2 = Instantiate(lightObject1, new Vector3(-StageGenerator.switchManager[i].z, -StageGenerator.switchManager[i].w, 0) * StageGenerator.squareScale + new Vector3(0, 0, -10), Quaternion.identity) as GameObject;
                         lightObject2.transform.localScale = new Vector3(StageGenerator.switchManager[i].x, StageGenerator.switchManager[i].y, 0) * StageGenerator.squareScale;
@@ -166,15 +165,7 @@ public class PlayerScript : MonoBehaviour
         isPlaying = true;
 
     }
-    public void dText()
-    {
-        damagedText.gameObject.SetActive(true);
-        Invoke("nonActive", 0.3f);
-    }
-    void nonActive()
-    {
-        damagedText.gameObject.SetActive(false);
-    }
+    
     void removeAnimation()
     {
         Destroy(damageAnimation1);

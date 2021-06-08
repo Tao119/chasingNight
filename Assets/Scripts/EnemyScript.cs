@@ -201,7 +201,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.name == "light(Clone)")
         {
             var color = spriteRenderer.color;
-            color.a -= Time.deltaTime*0.8f;
+            color.a -= Time.deltaTime*8/StageGenerator.len;
             spriteRenderer.color = color;
             //if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0) && PlayerScript.isPlaying==true)
             if (color.a<=0)
@@ -209,6 +209,7 @@ public class EnemyScript : MonoBehaviour
                 Destroy(this.gameObject);
                 //collision.gameObject.SendMessage("pause",1.0f);
                 defeatAnimation1 = Instantiate(defeatAnimation, transform.position, Quaternion.identity) as GameObject;
+                defeatAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
                 Invoke("removeAnimation", 0.75f);
                 PlayerScript.enemyObjectnumber--;
             }
