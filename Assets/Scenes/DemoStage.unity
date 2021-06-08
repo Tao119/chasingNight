@@ -225,53 +225,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &520083790
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2334336614467517061, guid: e0fdf9c1d6eab49058ae06a73a2265fc, type: 3}
-  m_PrefabInstance: {fileID: 2334336614366045131}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 520083791}
-  - component: {fileID: 520083792}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &520083791
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2334336614467517060, guid: e0fdf9c1d6eab49058ae06a73a2265fc, type: 3}
-  m_PrefabInstance: {fileID: 2334336614366045131}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520083790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9192549, y: -0.8129419, z: -12.153754}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &520083792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 2334336614467517083, guid: e0fdf9c1d6eab49058ae06a73a2265fc, type: 3}
-  m_PrefabInstance: {fileID: 2334336614366045131}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520083790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e71aeebeb9c045699118f7f1e74e031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HPText: {fileID: 1107707475}
-  damagedText: {fileID: 345069607}
 --- !u!1 &948600723
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +482,7 @@ RectTransform:
   - {fileID: 1107707473}
   - {fileID: 345069605}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -597,6 +552,10 @@ PrefabInstance:
       propertyPath: damagedText
       value: 
       objectReference: {fileID: 345069607}
+    - target: {fileID: 8529167791218357302, guid: e0fdf9c1d6eab49058ae06a73a2265fc, type: 3}
+      propertyPath: HPText
+      value: 
+      objectReference: {fileID: 1107707475}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0fdf9c1d6eab49058ae06a73a2265fc, type: 3}
 --- !u!1001 &4732343212924029154
@@ -766,7 +725,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8327918537555602464, guid: 8efcb593a19b04e3cb419987af2652ec, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8327918537555602464, guid: 8efcb593a19b04e3cb419987af2652ec, type: 3}
       propertyPath: m_LocalPosition.x

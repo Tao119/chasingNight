@@ -13,19 +13,28 @@ public class EnemyScript : MonoBehaviour
     public float speed = 2.5f;
     Animator animator;
 
+    //bool isLighted1=false;
+
+    public GameObject defeatAnimation;
+    GameObject defeatAnimation1;
+
+    SpriteRenderer spriteRenderer;
+
+
     int enemyx, enemyy;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         timer = 0;
         enemyx = -Mathf.RoundToInt(transform.position.x / StageGenerator.squareScale);
         enemyy = -Mathf.RoundToInt(transform.position.y / StageGenerator.squareScale);
         directionOption = new int[4];
         directionOptionNumber = 0;
         speedTimer = 0;
+
         startDirection();
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -43,26 +52,26 @@ public class EnemyScript : MonoBehaviour
         if (direction==0)
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
-            animator.SetInteger("x", 1);
-            animator.SetInteger("y", 0);
+            //animator.SetFloat("x", 1.0f);
+            //animator.SetFloat("y", 0.0f);
         }
         else if (direction==1)
         {
             transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
-            animator.SetInteger("x", -1);
-            animator.SetInteger("y", 0);
+            //animator.SetFloat("x", -1.0f);
+            //animator.SetFloat("y", 0.0f);
         }
         else if (direction==2)
         {
             transform.position += new Vector3(0, speed, 0) * Time.deltaTime;
-            animator.SetInteger("x", 0);
-            animator.SetInteger("y", 1);
+            //animator.SetFloat("x", 0.0f);
+            //animator.SetFloat("y", 1.0f);
         }
         else if (direction==3)
         {
             transform.position += new Vector3(0, -speed, 0) * Time.deltaTime;
-            animator.SetInteger("x", 0);
-            animator.SetInteger("y", -1);
+            //animator.SetFloat("x", 0.0f);
+            //animator.SetFloat("y", -1.0f);
         }
 
         if (transform.position.x >= 0 || transform.position.x <= -10 || transform.position.y <= -10 || transform.position.y >= 0)
@@ -70,9 +79,12 @@ public class EnemyScript : MonoBehaviour
             Destroy(this.gameObject);
             PlayerScript.enemyObjectnumber--;
         }
-
-
-
+        //var color = spriteRenderer.color;
+        //if (color.a<255 && isLighted1==false)
+        //{
+        //   color.a+= Time.deltaTime * 0.8f;
+        //    spriteRenderer.color = color;
+        //}
 
     }
     private void FixedUpdate()
@@ -131,6 +143,7 @@ public class EnemyScript : MonoBehaviour
         int randomNumber = Random.Range(0,directionOptionNumber);
         direction = directionOption[randomNumber];
 
+        animator.SetInteger("direction", direction);
 
 
 
@@ -140,6 +153,7 @@ public class EnemyScript : MonoBehaviour
 
     public void startDirection()
     {
+
         //Debug.Log("1:"+StageGenerator.location[enemyy , enemyx]);
         if (StageGenerator.location[enemyy + 1, enemyx] == 1)
         {
@@ -164,14 +178,19 @@ public class EnemyScript : MonoBehaviour
         int randomNumber = Random.Range(0, directionOptionNumber);
         direction = directionOption[randomNumber];
 
-        animator.SetInteger("direction", directionOption[randomNumber]);
         //Debug.Log(direction+","+directionOptionNumber);
+
+        animator=this.gameObject.GetComponent<Animator>();
+        animator.SetInteger("direction", direction);
+        
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.tag == "Player")
         {
             other.SendMessage("damaged");
+            
             Destroy(this.gameObject);
             PlayerScript.enemyObjectnumber--;
         } 
@@ -181,12 +200,24 @@ public class EnemyScript : MonoBehaviour
 
         if (collision.gameObject.name == "light(Clone)")
         {
-            if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0) && PlayerScript.isPlaying==true)
+            var color = spriteRenderer.color;
+            color.a -= Time.deltaTime*0.8f;
+            spriteRenderer.color = color;
+            //if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0) && PlayerScript.isPlaying==true)
+            if (color.a<=0)
             {
                 Destroy(this.gameObject);
                 //collision.gameObject.SendMessage("pause",1.0f);
+                defeatAnimation1 = Instantiate(defeatAnimation, transform.position, Quaternion.identity) as GameObject;
+                Invoke("removeAnimation", 0.75f);
                 PlayerScript.enemyObjectnumber--;
             }
         }
+    }
+    
+    
+    void removeAnimation()
+    {
+        Destroy(defeatAnimation1);
     }
 }

@@ -32,6 +32,10 @@ public class PlayerScript : MonoBehaviour
     public static int px, py;
 
     public GameObject OnSwitch;
+
+
+    public GameObject damageAnimation;
+    GameObject damageAnimation1;
     // Start is called before the first frame update
     void Start()
     {
@@ -119,9 +123,12 @@ public class PlayerScript : MonoBehaviour
     }
     public void damaged()
     {
+        damageAnimation1 = Instantiate(damageAnimation, transform.position, Quaternion.identity) as GameObject;
+        Invoke("removeAnimation", 0.5f);
         playerHP--;
         pause(1.0f);
         dText();
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -167,5 +174,9 @@ public class PlayerScript : MonoBehaviour
     void nonActive()
     {
         damagedText.gameObject.SetActive(false);
+    }
+    void removeAnimation()
+    {
+        Destroy(damageAnimation1);
     }
 }

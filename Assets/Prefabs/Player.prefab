@@ -146,8 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   damagedText: {fileID: 5616560635844413754, guid: 68635154a33514072a25c74488fea756, type: 3}
-  isPlaying: 0
   lightedCount: 0
   lightObject: {fileID: 7309146892885887938, guid: 2efc092aaa01a4c6a84cc828c9a168bb, type: 3}
   lightObject1: {fileID: 6754354047451229561, guid: ac9580d34db2147a39642c93c0acc52b, type: 3}
   OnSwitch: {fileID: 1969343134081803793, guid: 4fa6acb9dd00b4e0da4bee71a50416be, type: 3}
+  damageAnimation: {fileID: 1148581260102351644, guid: 5c8c1a6aefbc3412c9d59a1a1ffd4991, type: 3}
