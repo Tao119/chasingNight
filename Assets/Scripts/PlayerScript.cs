@@ -4,11 +4,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
 public class PlayerScript : MonoBehaviour
 {
-    public static int playerHP = 5;
+    public int playerHP = 5;
     public float speed = 2.0f;
     public static int direction = 3;
 
@@ -46,7 +44,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
         if (isPlaying)
         {
@@ -128,7 +126,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "switch")
         {
-            
+
             for (int i = 0; i < StageGenerator.lightSwitch.Length; i++)
             {
                 if (Input.GetMouseButton(0)) {

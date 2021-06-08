@@ -25,7 +25,6 @@ public class EnemyScript : MonoBehaviour
         directionOptionNumber = 0;
         speedTimer = 0;
         startDirection();
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -130,12 +129,6 @@ public class EnemyScript : MonoBehaviour
         //Debug.Log(direction + "," + directionOptionNumber + "," + directionOption[0]+","+ StageGenerator.location[enemyy + 1, enemyx]);
         int randomNumber = Random.Range(0,directionOptionNumber);
         direction = directionOption[randomNumber];
-
-
-
-
-
-
     }
 
     public void startDirection()
@@ -164,7 +157,9 @@ public class EnemyScript : MonoBehaviour
         int randomNumber = Random.Range(0, directionOptionNumber);
         direction = directionOption[randomNumber];
 
-        animator.SetInteger("direction", directionOption[randomNumber]);
+    animator = this.gameObject.GetComponent<Animator>();
+
+    animator.SetInteger("direction", directionOption[randomNumber]);
         //Debug.Log(direction+","+directionOptionNumber);
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -174,7 +169,7 @@ public class EnemyScript : MonoBehaviour
             other.SendMessage("damaged");
             Destroy(this.gameObject);
             PlayerScript.enemyObjectnumber--;
-        } 
+        }
     }
     void OnTriggerStay2D(Collider2D collision)
     {
