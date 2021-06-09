@@ -12,6 +12,7 @@ public class PlayerScript : MonoBehaviour
     public float speed = 2.0f;
     public static int direction = 3;
 
+    public static bool isProtected;
 
     public static bool isPlaying;
 
@@ -43,6 +44,7 @@ public class PlayerScript : MonoBehaviour
         Instantiate(lightObject, Vector3.zero, Quaternion.identity);
         isPlaying = true;
         enemyObjectnumber = 0;
+        isProtected = false;
     }
 
     // Update is called once per frame
@@ -122,12 +124,19 @@ public class PlayerScript : MonoBehaviour
     }
     public void damaged()
     {
-        damageAnimation1 = Instantiate(damageAnimation, transform.position, Quaternion.identity) as GameObject;
-        damageAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
+        if (isProtected == false)
+        {
+            damageAnimation1 = Instantiate(damageAnimation, transform.position, Quaternion.identity) as GameObject;
+            damageAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
 
-        Invoke("removeAnimation", 0.5f);
-        playerHP--;
-        pause(1.0f);
+            Invoke("removeAnimation", 0.5f);
+            playerHP--;
+            pause(1.0f);
+        }
+        else
+        {
+            isProtected = false;
+        }
 
     }
 

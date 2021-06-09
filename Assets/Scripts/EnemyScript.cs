@@ -8,6 +8,8 @@ public class EnemyScript : MonoBehaviour
     int[] directionOption;
     int directionOptionNumber=0;
 
+    public static int strength;
+
     float timer;
     float speedTimer;
     public float speed = 2.5f;
@@ -33,7 +35,7 @@ public class EnemyScript : MonoBehaviour
         directionOption = new int[4];
         directionOptionNumber = 0;
         speedTimer = 0;
-
+        strength = 1;
         startDirection();
     }
 
@@ -201,7 +203,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.name == "light(Clone)")
         {
             var color = spriteRenderer.color;
-            color.a -= Time.deltaTime*8/StageGenerator.len;
+            color.a -= Time.deltaTime*8*strength/StageGenerator.len;
             spriteRenderer.color = color;
             //if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0) && PlayerScript.isPlaying==true)
             if (color.a<=0)
