@@ -178,7 +178,7 @@ public class StageGenerator : MonoBehaviour
                         stageObject2[i, j].transform.localScale = new Vector3(squareScale, squareScale, 0);
                         floorNumber++;
                         break;
-
+                        
                 }
                 if (stageLayout[i].Substring(j, 1)!=" ") {
                     stageObject[i, j].transform.localScale = new Vector3(squareScale, squareScale, 0);
@@ -191,9 +191,9 @@ public class StageGenerator : MonoBehaviour
             switchObject1= Instantiate(switchObject, -1*lightSwitch[i] * squareScale + new Vector3(0, 0, -10), Quaternion.identity)as GameObject ;
             switchObject1.transform.localScale= new Vector3(squareScale/2, squareScale/2, 0);
         }
-            enemyGenerator.SendMessage("countFloor");
-        Instantiate(player, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
+        enemyGenerator.SendMessage("countFloor");
         player.transform.localScale = new Vector3(squareScale, squareScale, 0);
+        Instantiate(player, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
     }
 
 

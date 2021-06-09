@@ -62,12 +62,12 @@ public class EnemyGenerator : MonoBehaviour
     {
         if (count>0) {
             randomNum = Random.Range(0, count);
+            enemy.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             Instantiate(enemy, spawnableLocation[randomNum], Quaternion.identity);
             spawnMark1= Instantiate(spawnMark, spawnableLocation[randomNum], Quaternion.identity)as GameObject;
             spawnMark1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             Invoke("removeMark",1.5f);
             // Debug.Log(spawnableLocation[randomNum]);
-            enemy.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             PlayerScript.enemyObjectnumber++;
         }
     }

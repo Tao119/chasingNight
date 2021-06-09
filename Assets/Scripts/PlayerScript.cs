@@ -28,6 +28,7 @@ public class PlayerScript : MonoBehaviour
 
     int playerx, playery;
     public static int px, py;
+    public static string clearedStageName;
 
     public GameObject OnSwitch;
 
@@ -41,6 +42,7 @@ public class PlayerScript : MonoBehaviour
         lightedCount = 0;
         Instantiate(lightObject, Vector3.zero, Quaternion.identity);
         isPlaying = true;
+        enemyObjectnumber = 0;
     }
 
     // Update is called once per frame
@@ -112,8 +114,9 @@ public class PlayerScript : MonoBehaviour
             SceneManager.LoadScene("GameOver");
             playerHP = 5;
         }
-        if (lightedCount==StageGenerator.lightSwitch.Length&& enemyObjectnumber==0)
+        if (lightedCount==StageGenerator.lightSwitch.Length&& enemyObjectnumber<=0)
         {
+            clearedStageName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Clear");
         }
     }

@@ -14,9 +14,9 @@ public class GameoverManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene("DemoStage");
+        if (Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene("StageSelect");
         }
-
     }
 }

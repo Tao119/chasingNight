@@ -8,11 +8,41 @@ public class selectStagescript : MonoBehaviour
     bool isMoving;
     string stageName;
     int movingDirection;
+    string[] stageNames =
+        {
+            "DemoStage",
+            "Stage1-1"
+        };
+    public static bool[] isCleared=
+        {
+        false,false
+        };
+
+    GameObject clearedObject;
     // Start is called before the first frame update
     void Start()
     {
+        
+        for(int i = 0; i < stageNames.Length; i++) {
+            if (stageNames[i] == PlayerScript.clearedStageName)
+            {
+                isCleared[i] = true;
+            }
+            clearedObject = GameObject.Find(stageNames[i]);
+            if (isCleared[i]) {
+                clearedObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            }
+            else
+            {
+                clearedObject.GetComponent<SpriteRenderer>().color = Color.green;
+            }
+        }
+
+
+
         isMoving = false;
         transform.position = new Vector3(-5,-2,0);
+        
     }
 
     // Update is called once per frame
