@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    public static int playerHP = 5;
+    public static int playerHP;
     public float speed = 2.0f;
     public static int direction = 3;
 
@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerHP = 5;
+        playerHP = StageGenerator.HPLevel;
         lightedCount = 0;
         Instantiate(lightObject, Vector3.zero, Quaternion.identity);
         isPlaying = true;

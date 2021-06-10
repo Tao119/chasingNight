@@ -23,6 +23,8 @@ public class StageGenerator : MonoBehaviour
     public GameObject switchObject;
     public GameObject switchObject1;
 
+    public static int HPLevel;
+
 
     public static int floorNumber = 0;
 
@@ -117,6 +119,7 @@ public class StageGenerator : MonoBehaviour
                     new Vector4(7, 1, 6, 4),
                     new Vector4(3, 1, 2, 5),
                 };
+                HPLevel = 8;
                 break;
             case "Stage1-1":
                 stageLayout = new string[]{
@@ -134,6 +137,49 @@ public class StageGenerator : MonoBehaviour
             new Vector4(1,3,1,2),
             new Vector4(3,1,2,3),
                 };
+                HPLevel = 2;
+                break;
+            case "Stage1-2":
+                stageLayout = new string[]{
+                    "00000",
+                    "01110",
+                    "01010",
+                    "01110",
+                    "00000"
+                };
+                lightSwitch = new Vector3[]{
+                    new Vector3(1,0.5f,0),
+            new Vector3(3,3.5f,0),
+            new Vector3(0.5f,3,0),
+            new Vector3(3.5f,1,0),
+                };
+                switchManager = new Vector4[]{
+            new Vector4(1,3,1,2),
+            new Vector4(1,3,3,2),
+            new Vector4(3,1,2,3),
+            new Vector4(3,1,2,1),
+                };
+                HPLevel = 2;
+                break;
+            case "Stage1-3":
+                stageLayout = new string[]{
+                    "000000",
+                    "010010",
+                    "010010",
+                    "011110",
+                    "000000"
+                };
+                lightSwitch = new Vector3[]{
+                    new Vector3(1,0.5f,0),
+            new Vector3(0.5f,3,0),
+            new Vector3(4,0.5f,0),
+                };
+                switchManager = new Vector4[]{
+            new Vector4(1,3,1,2),
+            new Vector4(4,1,2.5f,3),
+            new Vector4(1,3,4,2),
+                };
+                HPLevel = 2;
                 break;
         }
 

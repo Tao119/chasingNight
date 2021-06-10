@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameoverManager : MonoBehaviour
 {
+    public static int isDisplayed = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +19,10 @@ public class GameoverManager : MonoBehaviour
         {
             SceneManager.LoadScene("StageSelect");
         }
+        if (SceneManager.GetActiveScene().name == "AllClear")
+        {
+            isDisplayed = 1;
+        }
     }
+
 }

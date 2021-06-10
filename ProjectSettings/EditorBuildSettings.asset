@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Opening.unity
     guid: 0b58a8c0709bc48868c23296848449eb
+  - enabled: 1
+    path: Assets/Scenes/AllClear.unity
+    guid: b1bdf525fe24f4077a0c353f13647f6d
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
@@ -17,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 2824e83d1d32740caa82bf1e817aa983
+  - enabled: 1
+    path: Assets/Scenes/Stage1-2.unity
+    guid: 144fbfee345904c168ba4d38dcf3d1a2
+  - enabled: 1
+    path: Assets/Scenes/Stage1-3.unity
+    guid: d2844c8cab0454033bda9037ba8971bb
   - enabled: 1
     path: Assets/Scenes/Clear.unity
     guid: 6a546aa31d29849c683b6a92721397e1
