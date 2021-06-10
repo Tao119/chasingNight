@@ -69,6 +69,7 @@ public class EnemyGenerator : MonoBehaviour
             Invoke("removeMark",1.5f);
             // Debug.Log(spawnableLocation[randomNum]);
             PlayerScript.enemyObjectnumber++;
+            //Debug.Log(PlayerScript.enemyObjectnumber);
         }
     }
     public void countFloor()

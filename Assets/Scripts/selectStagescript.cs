@@ -17,6 +17,9 @@ public class selectStagescript : MonoBehaviour
 
     Transform transform1;
 
+
+    //ステージ追加ごとに変更
+
     string[] stageNames =
         {
         //    "DemoStage",

@@ -100,7 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   defeatAnimation: {fileID: 7446115570382744680, guid: c5fac8165aa444e40b0f471622ce89cc, type: 3}
-  damageAnimation: {fileID: 1148581260102351644, guid: 5c8c1a6aefbc3412c9d59a1a1ffd4991, type: 3}
 --- !u!61 &7114954010015383520
 BoxCollider2D:
   m_ObjectHideFlags: 0

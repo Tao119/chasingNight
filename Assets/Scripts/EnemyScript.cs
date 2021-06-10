@@ -195,6 +195,8 @@ public class EnemyScript : MonoBehaviour
             
             Destroy(this.gameObject);
             PlayerScript.enemyObjectnumber--;
+
+            //Debug.Log(PlayerScript.enemyObjectnumber);
         } 
     }
     void OnTriggerStay2D(Collider2D collision)

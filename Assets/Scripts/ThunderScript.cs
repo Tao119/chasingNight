@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class ThunderScript : MonoBehaviour
 {
-    GameObject[] enemy;
+    GameObject enemy;
     int a;
+    public GameObject illust;
+    public GameObject defeat;
+    GameObject defeatAnime;
     // Start is called before the first frame update
     void Start()
     {
         a = PlayerScript.enemyObjectnumber;
-        enemy = new GameObject[a];
         for (int i = 0; i < a; i++)
         {
-            enemy[i] = GameObject.Find("Enemy(Clone)");
+            enemy = GameObject.Find("Enemy(Clone)");
+            illust.transform.localScale = new Vector3(0.5f, 0.5f, 0) * StageGenerator.squareScale;
+            defeat.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             transform.localScale = new Vector3(1, 1, 0) * StageGenerator.squareScale;
-            Instantiate(this.gameObject, enemy[i].transform.position, Quaternion.identity);
-            Color _color = enemy[i].GetComponent<SpriteRenderer>().color;
-            _color.a = 0;
-            enemy[i].GetComponent<SpriteRenderer>().color=_color;
-            Invoke("destroy", 1.0f);
+            //Instantiate(illust, enemy.transform.position, Quaternion.identity);
+            defeatAnime= Instantiate(defeat, enemy.transform.position, Quaternion.identity)as GameObject;
+            Invoke("removeAnimation", 0.75f);
+            Destroy(enemy);
+            PlayerScript.enemyObjectnumber --;
+            Debug.Log(PlayerScript.enemyObjectnumber);
+
         }
+        Invoke("destroy", 1.0f);
     }
 
     // Update is called once per frame
@@ -32,5 +39,9 @@ public class ThunderScript : MonoBehaviour
     {
         Destroy(this.gameObject);
         
+    }
+    void removeAnimation()
+    {
+        Destroy(defeatAnime);
     }
 }

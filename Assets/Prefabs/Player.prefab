@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  damagedText: {fileID: 5616560635844413754, guid: 68635154a33514072a25c74488fea756, type: 3}
   lightedCount: 0
   lightObject: {fileID: 7309146892885887938, guid: 2efc092aaa01a4c6a84cc828c9a168bb, type: 3}
   lightObject1: {fileID: 6754354047451229561, guid: ac9580d34db2147a39642c93c0acc52b, type: 3}

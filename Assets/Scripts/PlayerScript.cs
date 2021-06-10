@@ -50,7 +50,6 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
         if (isPlaying)
         {
@@ -124,8 +123,10 @@ public class PlayerScript : MonoBehaviour
     }
     public void damaged()
     {
+        //Debug.Log(enemyObjectnumber);
         if (isProtected == false)
         {
+
             damageAnimation1 = Instantiate(damageAnimation, transform.position, Quaternion.identity) as GameObject;
             damageAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
 

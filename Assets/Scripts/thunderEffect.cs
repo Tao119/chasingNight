@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buffScript : MonoBehaviour
+public class thunderEffect : MonoBehaviour
 {
+    float timer = 0;
     // Start is called before the first frame update
     void Start()
     {
-        EnemyScript.strength = 3;
-        Invoke("endBuff",10.0f);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    void endBuff()
-    {
-        EnemyScript.strength = 1;
-        Destroy(this.gameObject);
+        timer += Time.deltaTime;
+        if (timer >= 1.0f)
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 }
