@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThunderScript : MonoBehaviour
 {
-    GameObject enemy;
+    GameObject[] enemy;
     int a;
     public GameObject illust;
     public GameObject defeat;
@@ -13,21 +13,25 @@ public class ThunderScript : MonoBehaviour
     void Start()
     {
         a = PlayerScript.enemyObjectnumber;
+        enemy = new GameObject[a];
         for (int i = 0; i < a; i++)
         {
-            enemy = GameObject.Find("Enemy(Clone)");
+            enemy[i] = GameObject.Find("Enemy(Clone)");
             illust.transform.localScale = new Vector3(0.5f, 0.5f, 0) * StageGenerator.squareScale;
             defeat.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             transform.localScale = new Vector3(1, 1, 0) * StageGenerator.squareScale;
-            //Instantiate(illust, enemy.transform.position, Quaternion.identity);
-            defeatAnime= Instantiate(defeat, enemy.transform.position, Quaternion.identity)as GameObject;
+            //Instantiate(illust, enemy[i].transform.position, Quaternion.identity);
+            defeatAnime= Instantiate(defeat, enemy[i].transform.position, Quaternion.identity)as GameObject;
             Invoke("removeAnimation", 0.75f);
-            Destroy(enemy);
             PlayerScript.enemyObjectnumber --;
             Debug.Log(PlayerScript.enemyObjectnumber);
 
         }
         Invoke("destroy", 1.0f);
+        for(int i=0; i < a; i++)
+        {
+            Destroy(enemy[i]);
+        }
     }
 
     // Update is called once per frame

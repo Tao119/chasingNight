@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FloorScript : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class FloorScript : MonoBehaviour
     {
         if (other.gameObject.name=="light1(Clone)" )
         {
-            EnemyGenerator.isLighted[floory,floorx] = true;
+            if (SceneManager.GetActiveScene().name != "BossStage")
+            {
+                EnemyGenerator.isLighted[floory, floorx] = true;
+            }
             //Debug.Log(floorx+","+floory);
             Destroy(this.gameObject);
         }

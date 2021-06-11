@@ -20,6 +20,7 @@ public class StageGenerator : MonoBehaviour
 
     public GameObject player;
     public GameObject enemy;
+    public GameObject boss;
     public GameObject switchObject;
     public GameObject switchObject1;
 
@@ -181,6 +182,109 @@ public class StageGenerator : MonoBehaviour
                 };
                 HPLevel = 2;
                 break;
+            case "Stage2-1":
+                stageLayout = new string[]{
+                    "000000000",
+                    "001010100",
+                    "011111110",
+                    "001010100",
+                    "000000000"
+                };
+                lightSwitch = new Vector3[]{
+                    new Vector3(2,0.5f,0),
+            new Vector3(4,3.5f,0),
+            new Vector3(6,0.5f,0),
+            new Vector3(7.5f,2,0),
+
+                };
+                switchManager = new Vector4[]{
+            new Vector4(1,3,3,2),
+            new Vector4(1,3,4,2),
+            new Vector4(1,3,6,2),
+            new Vector4(7,1,4,2),
+                };
+                HPLevel = 4; 
+                break;
+            case "Stage2-2":
+                stageLayout = new string[]{
+                    "000000000",
+                    "001010100",
+                    "011111110",
+                    "001010100",
+                    "000000000"
+                };
+                lightSwitch = new Vector3[]{
+                    new Vector3(2,0.5f,0),
+            new Vector3(4,3.5f,0),
+            new Vector3(6,0.5f,0),
+            new Vector3(7.5f,2,0),
+
+                };
+                switchManager = new Vector4[]{
+            new Vector4(1,3,3,2),
+            new Vector4(1,3,4,2),
+            new Vector4(1,3,6,2),
+            new Vector4(7,1,4,2),
+                };
+                HPLevel = 4;
+                break;
+            case "BossStage":
+                stageLayout = new string[]{
+                    "00000000000000000",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "01111111111111110",
+                    "00000000000000000"
+                };
+                lightSwitch = new Vector3[]{
+                    new Vector3(1,0.5f,0),
+                    new Vector3(3,0.5f,0),
+                    new Vector3(5,0.5f,0),
+                    new Vector3(7,0.5f,0),
+                    new Vector3(9,0.5f,0),
+                    new Vector3(11,0.5f,0),
+                    new Vector3(13,0.5f,0),
+                    new Vector3(15,0.5f,0),
+                    new Vector3(2,15.5f,0),
+                    new Vector3(4,15.5f,0),
+                    new Vector3(6,15.5f,0),
+                    new Vector3(8,15.5f,0),
+                    new Vector3(10,15.5f,0),
+                    new Vector3(12,15.5f,0),
+                    new Vector3(14,15.5f,0),
+
+                };
+                switchManager = new Vector4[]{
+            new Vector4(1,15,1,8),
+            new Vector4(1,15,3,8),
+            new Vector4(1,15,5,8),
+            new Vector4(1,15,7,8),
+            new Vector4(1,15,9,8),
+            new Vector4(1,15,11,8),
+            new Vector4(1,15,13,8),
+            new Vector4(1,15,15,8),
+            new Vector4(1,15,2,8),
+            new Vector4(1,15,4,8),
+            new Vector4(1,15,6,8),
+            new Vector4(1,15,8,8),
+            new Vector4(1,15,10,8),
+            new Vector4(1,15,12,8),
+            new Vector4(1,15,14,8)
+                };
+                HPLevel = 10;
+                break;
         }
 
 
@@ -191,7 +295,10 @@ public class StageGenerator : MonoBehaviour
    
         lengthy = stageLayout.GetLength(0);
         lengthx = stageLayout[0].Length;
-        enemyGenerator.SendMessage("setting");
+        if (SceneManager.GetActiveScene().name != "BossStage")
+        {
+            enemyGenerator.SendMessage("setting");
+        }
 
         len = Mathf.Max(stageLayout.GetLength(0), stageLayout[0].Length);
         squareScale = 10.0f / len;
@@ -237,9 +344,13 @@ public class StageGenerator : MonoBehaviour
             switchObject1= Instantiate(switchObject, -1*lightSwitch[i] * squareScale + new Vector3(0, 0, -10), Quaternion.identity)as GameObject ;
             switchObject1.transform.localScale= new Vector3(squareScale/2, squareScale/2, 0);
         }
-        enemyGenerator.SendMessage("countFloor");
+        if (SceneManager.GetActiveScene().name != "BossStage")
+        {
+            enemyGenerator.SendMessage("countFloor");
+        }
         player.transform.localScale = new Vector3(squareScale, squareScale, 0);
         Instantiate(player, new Vector3(-squareScale, -squareScale, -10), Quaternion.identity);
+        Instantiate(boss, new Vector3(-10*squareScale, -10*squareScale, -10), Quaternion.identity);
     }
 
 

@@ -22,7 +22,7 @@ public class ItemController : MonoBehaviour
     {
         slotNumber = 0;
         player = GameObject.Find("Player(Clone)");
-        itemStock = new int[] {1,1,1,1};
+        itemStock = new int[] {1,1,2,2};
        
     }
 

@@ -15,6 +15,8 @@ public class selectStagescript : MonoBehaviour
     public Text textObject;
     public Text allClearedText;
 
+    public GameObject stage;
+
     Transform transform1;
 
 
@@ -26,18 +28,29 @@ public class selectStagescript : MonoBehaviour
             "Stage1-1",
             "Stage1-2",
             "Stage1-3",
-            "DemoStage"
+            "Stage2-1",
+            "Stage2-2",
+            "Stage2-3",
+            "Stage3-1",
+            "Stage3-2",
+            "Stage3-3",
+            "Stage4-1",
+            "Stage4-2",
+            "Stage4-3",
+            "DemoStage",
+            "BossStage"
         };
     public static bool[] isCleared=
         {
     //    false,
-        false,false,false,false
+        false,false,false,false,false,false,false,false,false,false,false,false,false,false
         };
 
     GameObject clearedObject;
     // Start is called before the first frame update
     void Start()
     {
+        
         transform1 = GameObject.Find("Canvas").transform;
         timer = 0;
         for(int i = 0; i < stageNames.Length; i++) {
@@ -45,7 +58,9 @@ public class selectStagescript : MonoBehaviour
             textObject.color = Color.red;
             textObject.fontSize = 100;
             Instantiate(textObject, new Vector3(-5 + 8 * i, 2, 0), Quaternion.identity, transform1);
+            GameObject stage1 = Instantiate(stage, new Vector3(-5 + 8 * i, -2, 0), Quaternion.identity)as GameObject;
 
+            stage1.name = stageNames[i];
             if (stageNames[i] == PlayerScript.clearedStageName)
             {
                 isCleared[i] = true;
@@ -71,6 +86,14 @@ public class selectStagescript : MonoBehaviour
                     clearedStageNumber = i + 1;
                 }
         }
+        if (PlayerScript.StageName != null)
+        {
+            transform.position = GameObject.Find(PlayerScript.StageName).transform.position;
+        }
+        else
+        {
+            transform.position = GameObject.Find("Stage1-1").transform.position;
+        }
         if (isCleared[stageNames.Length-1]==true && GameoverManager.isDisplayed==0)
         {
             SceneManager.LoadScene("AllClear");
@@ -86,15 +109,7 @@ public class selectStagescript : MonoBehaviour
 
 
 
-        isMoving = false;
-        if (PlayerScript.clearedStageName != null)
-        {
-            transform.position = GameObject.Find(PlayerScript.clearedStageName).transform.position;
-        }
-        else
-        {
-            transform.position = GameObject.Find(stageNames[0]).transform.position;
-        }
+        
         
     }
 

@@ -2,25 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class BossScript : MonoBehaviour
 {
-    int direction=3;
+    public static int direction = 3;
     int[] directionOption;
-    int directionOptionNumber=0;
+    int directionOptionNumber = 0;
 
-    bool isAnimated;
+    int count=0;
 
-    public static int strength;
+    int strength;
 
     float timer;
     float speedTimer;
-    public static float speed = 2.5f;
+    public float speed = 2;
     Animator animator;
 
     //bool isLighted1=false;
 
     public GameObject defeatAnimation;
+    public GameObject enemy;
+    public GameObject fireball;
     GameObject defeatAnimation1;
+
+    bool isAnimated;
 
     SpriteRenderer spriteRenderer;
 
@@ -30,6 +34,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.localScale = Vector3.one * StageGenerator.squareScale * 3;
         spriteRenderer = GetComponent<SpriteRenderer>();
         timer = 0;
         enemyx = -Mathf.RoundToInt(transform.position.x / StageGenerator.squareScale);
@@ -39,40 +44,57 @@ public class EnemyScript : MonoBehaviour
         speedTimer = 0;
         strength = 1;
         startDirection();
+        count = 0;
         isAnimated = false;
+        EnemyScript.speed = 1.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
         speedTimer += Time.deltaTime;
-        if (timer >= 15)
+        if (speedTimer>=2)
         {
-            speed *= 1.1f;
+            fireball.transform.localScale = Vector3.one * StageGenerator.squareScale*2;
+            Instantiate(fireball, transform.position, Quaternion.identity);
             speedTimer = 0;
+            count++;
+            if (count >= 4)
+            {
+                enemy.transform.localScale = Vector3.one * StageGenerator.squareScale;
+                Instantiate(enemy, transform.position, Quaternion.identity);
+                Instantiate(enemy, transform.position, Quaternion.identity);
+                Instantiate(enemy, transform.position, Quaternion.identity);
+                PlayerScript.enemyObjectnumber += 3;
+                count = 0;
+
+            }
+
         }
+            
+
         //Debug.Log(enemyx+","+enemyy);
         enemyx = -Mathf.RoundToInt(transform.position.x / StageGenerator.squareScale);
         enemyy = -Mathf.RoundToInt(transform.position.y / StageGenerator.squareScale);
-        if (direction==0)
+        if (direction == 0)
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
             //animator.SetFloat("x", 1.0f);
             //animator.SetFloat("y", 0.0f);
         }
-        else if (direction==1)
+        else if (direction == 1)
         {
             transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
             //animator.SetFloat("x", -1.0f);
             //animator.SetFloat("y", 0.0f);
         }
-        else if (direction==2)
+        else if (direction == 2)
         {
             transform.position += new Vector3(0, speed, 0) * Time.deltaTime;
             //animator.SetFloat("x", 0.0f);
             //animator.SetFloat("y", 1.0f);
         }
-        else if (direction==3)
+        else if (direction == 3)
         {
             transform.position += new Vector3(0, -speed, 0) * Time.deltaTime;
             //animator.SetFloat("x", 0.0f);
@@ -82,7 +104,6 @@ public class EnemyScript : MonoBehaviour
         if (transform.position.x >= 0 || transform.position.x <= -10 || transform.position.y <= -10 || transform.position.y >= 0)
         {
             Destroy(this.gameObject);
-            PlayerScript.enemyObjectnumber--;
         }
         //var color = spriteRenderer.color;
         //if (color.a<255 && isLighted1==false)
@@ -104,27 +125,27 @@ public class EnemyScript : MonoBehaviour
     void changeDirection()
     {
         directionOptionNumber = 0;
-        if (StageGenerator.location[enemyy + 1, enemyx] == 1 && direction!=2)
+        if (StageGenerator.location[enemyy + 2, enemyx] == 1 && direction != 2)
         {
             directionOption[directionOptionNumber] = 3;
             directionOptionNumber++;
         }
-        if (StageGenerator.location[enemyy - 1, enemyx] == 1 && direction != 3)
+        if (StageGenerator.location[enemyy - 2, enemyx] == 1 && direction != 3)
         {
             directionOption[directionOptionNumber] = 2;
             directionOptionNumber++;
         }
-        if (StageGenerator.location[enemyy, enemyx + 1] == 1 && direction != 0)
+        if (StageGenerator.location[enemyy, enemyx + 2] == 1 && direction != 0)
         {
             directionOption[directionOptionNumber] = 1;
             directionOptionNumber++;
         }
-        if (StageGenerator.location[enemyy, enemyx - 1] == 1 && direction != 1)
+        if (StageGenerator.location[enemyy, enemyx - 2] == 1 && direction != 1)
         {
             directionOption[directionOptionNumber] = 0;
             directionOptionNumber++;
         }
-        if(directionOptionNumber==0)
+        if (directionOptionNumber == 0)
         {
             switch (direction)
             {
@@ -145,7 +166,7 @@ public class EnemyScript : MonoBehaviour
         }
 
         //Debug.Log(direction + "," + directionOptionNumber + "," + directionOption[0]+","+ StageGenerator.location[enemyy + 1, enemyx]);
-        int randomNumber = Random.Range(0,directionOptionNumber);
+        int randomNumber = Random.Range(0, directionOptionNumber);
         direction = directionOption[randomNumber];
 
         animator.SetInteger("direction", direction);
@@ -160,22 +181,22 @@ public class EnemyScript : MonoBehaviour
     {
 
         //Debug.Log("1:"+StageGenerator.location[enemyy , enemyx]);
-        if (StageGenerator.location[enemyy + 1, enemyx] == 1)
+        if (StageGenerator.location[enemyy + 2, enemyx] == 1)
         {
             directionOption[directionOptionNumber] = 3;
             directionOptionNumber++;
         }
-        if (StageGenerator.location[enemyy - 1, enemyx] == 1)
+        if (StageGenerator.location[enemyy - 2, enemyx] == 1)
         {
             directionOption[directionOptionNumber] = 2;
             directionOptionNumber++;
         }
-        if (StageGenerator.location[enemyy, enemyx + 1] == 1)
+        if (StageGenerator.location[enemyy, enemyx + 2] == 1)
         {
             directionOption[directionOptionNumber] = 1;
             directionOptionNumber++;
         }
-        if (StageGenerator.location[enemyy, enemyx - 1] == 1)
+        if (StageGenerator.location[enemyy, enemyx - 2] == 1)
         {
             directionOption[directionOptionNumber] = 0;
             directionOptionNumber++;
@@ -185,22 +206,20 @@ public class EnemyScript : MonoBehaviour
 
         //Debug.Log(direction+","+directionOptionNumber);
 
-        animator=this.gameObject.GetComponent<Animator>();
+        animator = this.gameObject.GetComponent<Animator>();
         animator.SetInteger("direction", direction);
-        
+
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        
-        if (other.gameObject.tag == "Player" && PlayerScript.isPlaying==true)
+
+        if (other.gameObject.tag == "Player" && PlayerScript.isPlaying == true)
         {
             other.SendMessage("damaged");
-            
-            Destroy(this.gameObject);
-            PlayerScript.enemyObjectnumber--;
+
 
             //Debug.Log(PlayerScript.enemyObjectnumber);
-        } 
+        }
     }
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -208,25 +227,24 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.name == "light(Clone)")
         {
             var color = spriteRenderer.color;
-            color.a -= Time.deltaTime*8*strength/StageGenerator.len;
+            color.a -= Time.deltaTime * strength / StageGenerator.len/2;
             spriteRenderer.color = color;
             //if ((Mathf.Abs(enemyx - PlayerScript.px) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyy - PlayerScript.py) == 0)|| (Mathf.Abs(enemyy - PlayerScript.py) <= 3 * StageGenerator.squareScale && Mathf.Abs(enemyx - PlayerScript.px) == 0) && PlayerScript.isPlaying==true)
-            if (color.a<=0&&isAnimated==false)
+            if (color.a <= 0 && isAnimated==false)
             {
                 //collision.gameObject.SendMessage("pause",1.0f);
-                PlayerScript.enemyObjectnumber--;
-                Destroy(this.gameObject);
                 defeatAnimation1 = Instantiate(defeatAnimation, transform.position, Quaternion.identity) as GameObject;
-                defeatAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
+                defeatAnimation1.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0)*6;
                 Invoke("removeAnimation", 0.75f);
                 isAnimated = true;
             }
         }
     }
-    
-    
+
+
     void removeAnimation()
     {
         Destroy(defeatAnimation1);
+        Destroy(this.gameObject);
     }
 }

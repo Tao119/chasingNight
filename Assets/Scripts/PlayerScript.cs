@@ -30,12 +30,15 @@ public class PlayerScript : MonoBehaviour
     int playerx, playery;
     public static int px, py;
     public static string clearedStageName;
+    public static string StageName;
 
     public GameObject OnSwitch;
 
 
     public GameObject damageAnimation;
     GameObject damageAnimation1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,12 +115,20 @@ public class PlayerScript : MonoBehaviour
 
         if (playerHP <= 0)
         {
+            StageName= SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("GameOver");
             playerHP = 5;
         }
-        if (lightedCount==StageGenerator.lightSwitch.Length&& enemyObjectnumber<=0)
+        if (lightedCount==StageGenerator.lightSwitch.Length&& enemyObjectnumber<=0 && SceneManager.GetActiveScene().name!="BossStage")
         {
             clearedStageName = SceneManager.GetActiveScene().name;
+            StageName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene("Clear");
+        }
+        if (lightedCount == StageGenerator.lightSwitch.Length && enemyObjectnumber <= 0 && GameObject.Find("Boss")==null && SceneManager.GetActiveScene().name == "BossStage")
+        {
+            clearedStageName = SceneManager.GetActiveScene().name;
+            StageName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Clear");
         }
     }
