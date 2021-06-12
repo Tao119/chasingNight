@@ -10,7 +10,7 @@ public class BossScript : MonoBehaviour
 
     int count=0;
 
-    int strength;
+    public static int strength;
 
     float timer;
     float speedTimer;

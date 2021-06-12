@@ -535,6 +535,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6016737481029089892, guid: 95369c4f965224c4eaf503d9bd5b162e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d8999bb4ad8dd46cb80f039d75f119d3, type: 2}
     - target: {fileID: 3514569046994508944, guid: 95369c4f965224c4eaf503d9bd5b162e, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -610,4 +614,5 @@ MonoBehaviour:
   canvasObject: {fileID: 5463275598851267098, guid: 1ed8a315b89c64962841047d52f4340c, type: 3}
   textObject: {fileID: 8552769044203735418, guid: 5e9050832ec574a5282b8347483c2ea8, type: 3}
   allClearedText: {fileID: 651957696}
+  road: {fileID: 7868167060387008346, guid: 064c0fc9025034c38b9b672a59093b14, type: 3}
   stage: {fileID: 1521418987698511027, guid: 5692219d2f0e74ae68ec2667858838d6, type: 3}

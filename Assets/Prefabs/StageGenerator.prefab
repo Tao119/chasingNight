@@ -47,7 +47,10 @@ MonoBehaviour:
   - {fileID: 108630444192860091, guid: 57f4a15d8536342e8a5bbcb8746baac1, type: 3}
   - {fileID: 1347055337540680868, guid: cd5e315c5cde94a588e65648b12db90e, type: 3}
   - {fileID: 7569120932427393833, guid: c65c90723c156458b83916ed33349ab8, type: 3}
-  enemyGenerator: {fileID: 0}
+  enemyGenerator: {fileID: 8327918537555602494, guid: 8efcb593a19b04e3cb419987af2652ec, type: 3}
+  itemGenerator: {fileID: 6602540061560082518, guid: f31abcf8c0f134f3f8bbb8a883fd1a1b, type: 3}
   player: {fileID: 7246029235040882115, guid: 22ed0f869321d48d0bdbede361a23d04, type: 3}
   enemy: {fileID: 4990894718352901461, guid: ed95199dfb4ab410b963bb992d97f14f, type: 3}
+  boss: {fileID: 687992289909813587, guid: d02d982858e9f42969fea3e5d34b2c34, type: 3}
   switchObject: {fileID: 493479898142618388, guid: fc785eed7af04449c98bb2cd84e10063, type: 3}
+  switchObject1: {fileID: 0}

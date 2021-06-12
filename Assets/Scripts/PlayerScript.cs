@@ -16,6 +16,9 @@ public class PlayerScript : MonoBehaviour
 
     public static bool isPlaying;
 
+    public static bool Damaging;
+
+
     public int lightedCount=0;
 
 
@@ -38,6 +41,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject damageAnimation;
     GameObject damageAnimation1;
 
+    Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +53,9 @@ public class PlayerScript : MonoBehaviour
         isPlaying = true;
         enemyObjectnumber = 0;
         isProtected = false;
+        Damaging = false;
+
+        animator = this.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -60,24 +68,29 @@ public class PlayerScript : MonoBehaviour
             {
                 transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
                 direction = 0;
+                animator.SetInteger("direction", direction);
 
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
                 transform.position += new Vector3(-speed, 0, 0) * Time.deltaTime;
                 direction = 1;
+                animator.SetInteger("direction", direction);
             }
             else if (Input.GetKey(KeyCode.UpArrow))
             {
                 transform.position += new Vector3(0, speed, 0) * Time.deltaTime;
                 direction = 2;
+                animator.SetInteger("direction", direction);
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
                 transform.position += new Vector3(0, -speed, 0) * Time.deltaTime;
                 direction = 3;
+                animator.SetInteger("direction", direction);
             }
         }
+
 
         playerx = -Mathf.RoundToInt(transform.position.x / StageGenerator.squareScale);
         playery = -Mathf.RoundToInt(transform.position.y / StageGenerator.squareScale);
@@ -108,6 +121,7 @@ public class PlayerScript : MonoBehaviour
             }
             lightLength++;
 
+
         }
         // Debug.Log(lightLength);
 
@@ -117,19 +131,21 @@ public class PlayerScript : MonoBehaviour
         {
             StageName= SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("GameOver");
-            playerHP = 5;
+            selectStagescript.stockItem= ItemController.itemStock;
         }
         if (lightedCount==StageGenerator.lightSwitch.Length&& enemyObjectnumber<=0 && SceneManager.GetActiveScene().name!="BossStage")
         {
             clearedStageName = SceneManager.GetActiveScene().name;
             StageName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Clear");
+            selectStagescript.stockItem = ItemController.itemStock;
         }
         if (lightedCount == StageGenerator.lightSwitch.Length && enemyObjectnumber <= 0 && GameObject.Find("Boss")==null && SceneManager.GetActiveScene().name == "BossStage")
         {
             clearedStageName = SceneManager.GetActiveScene().name;
             StageName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene("Clear");
+            selectStagescript.stockItem = ItemController.itemStock;
         }
     }
     public void damaged()
@@ -143,6 +159,7 @@ public class PlayerScript : MonoBehaviour
 
             Invoke("removeAnimation", 0.5f);
             playerHP--;
+            Damaging = true;
             pause(1.0f);
         }
         else
@@ -187,6 +204,7 @@ public class PlayerScript : MonoBehaviour
     {
         speed = 2.0f;
         isPlaying = true;
+        Damaging = false;
 
     }
     

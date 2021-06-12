@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5048629804479008490}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4990894718352901461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.7692308, y: -0.7692308, z: -10}
-  m_LocalScale: {x: 1.1764706, y: 1.1764706, z: 1.1764706}
+  m_LocalScale: {x: 0.5882353, y: 0.5882353, z: 0.5882353}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d9cd3b225d84382bb7127f4765bc62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   defeatAnimation: {fileID: 7446115570382744680, guid: c5fac8165aa444e40b0f471622ce89cc, type: 3}
 --- !u!61 &7114954010015383520
 BoxCollider2D:

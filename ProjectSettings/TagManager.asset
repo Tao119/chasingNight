@@ -9,6 +9,8 @@ TagManager:
   - light
   - switch
   - stage
+  - defeat
+  - enemy
   layers:
   - Default
   - TransparentFX

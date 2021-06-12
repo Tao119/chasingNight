@@ -13,7 +13,7 @@ public class ItemController : MonoBehaviour
 
     public GameObject[] itemSlot;
     public GameObject[] illustSlot;
-    int[] itemStock;
+    public static  int[] itemStock=new int[4];
     int slotNumber;
     public Text stockText;
 
@@ -22,8 +22,8 @@ public class ItemController : MonoBehaviour
     {
         slotNumber = 0;
         player = GameObject.Find("Player(Clone)");
-        itemStock = new int[] {1,1,2,2};
-       
+        itemStock=selectStagescript.stockItem ;
+        itemStock = new int[4] { 1, 1, 1, 1 };
     }
 
     // Update is called once per frame

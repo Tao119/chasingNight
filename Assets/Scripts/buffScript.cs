@@ -8,6 +8,7 @@ public class buffScript : MonoBehaviour
     void Start()
     {
         EnemyScript.strength = 3;
+        BossScript.strength = 3;
         Invoke("endBuff",10.0f);
     }
 
@@ -19,6 +20,7 @@ public class buffScript : MonoBehaviour
     void endBuff()
     {
         EnemyScript.strength = 1;
+        BossScript.strength = 1;
         Destroy(this.gameObject);
     }
 }

@@ -14,8 +14,13 @@ public class selectStagescript : MonoBehaviour
     public Canvas canvasObject;
     public Text textObject;
     public Text allClearedText;
+    public GameObject road;
 
     public GameObject stage;
+
+    public static int[] stockItem;
+
+    Animator animator;
 
     Transform transform1;
 
@@ -33,17 +38,18 @@ public class selectStagescript : MonoBehaviour
             "Stage2-3",
             "Stage3-1",
             "Stage3-2",
-            "Stage3-3",
+            //"Stage3-3",
             "Stage4-1",
             "Stage4-2",
-            "Stage4-3",
-            "DemoStage",
+            //"Stage4-3",
+            //"DemoStage",
             "BossStage"
         };
     public static bool[] isCleared=
         {
     //    false,
-        false,false,false,false,false,false,false,false,false,false,false,false,false,false
+        false,false,false,false,false,false,false,false,false,false,false
+            //,false,false
         };
 
     GameObject clearedObject;
@@ -51,6 +57,7 @@ public class selectStagescript : MonoBehaviour
     void Start()
     {
         
+        animator = this.gameObject.GetComponent<Animator>();
         transform1 = GameObject.Find("Canvas").transform;
         timer = 0;
         for(int i = 0; i < stageNames.Length; i++) {
@@ -73,6 +80,10 @@ public class selectStagescript : MonoBehaviour
                 textObject.color = Color.yellow;
                 textObject.fontSize = 50;
                 Instantiate(textObject, new Vector3(-5 + 8 * i, 3, 0), Quaternion.identity, transform1);
+                if (i < stageNames.Length - 1)
+                {
+                    Instantiate(road, new Vector3(-1 + 8 * i, -2, 0), Quaternion.identity);
+                }
             }
             else
             {
@@ -123,12 +134,14 @@ public class selectStagescript : MonoBehaviour
             {
                 isMoving = true;
                 movingDirection = 1;
+                animator.SetInteger("direction", movingDirection);
                 Invoke("resetDirection", 1.0f);
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) && isMoving == false && transform.position.x>=1)
             {
                 isMoving = true;
                 movingDirection = 2;
+                animator.SetInteger("direction", movingDirection);
                 Invoke("resetDirection", 1.0f);
             }
         }
@@ -154,6 +167,7 @@ public class selectStagescript : MonoBehaviour
     }
     void resetDirection() {
         movingDirection = 0;
+        animator.SetInteger("direction", movingDirection);
         isMoving = false;
     }
 

@@ -4,34 +4,35 @@ using UnityEngine;
 
 public class ThunderScript : MonoBehaviour
 {
-    GameObject[] enemy;
-    int a;
+    GameObject[] enemies;
     public GameObject illust;
     public GameObject defeat;
-    GameObject defeatAnime;
+    GameObject[] defeatAnime;
     // Start is called before the first frame update
     void Start()
     {
-        a = PlayerScript.enemyObjectnumber;
-        enemy = new GameObject[a];
-        for (int i = 0; i < a; i++)
+        var _color=this.gameObject.GetComponent<SpriteRenderer>().color;
+        _color.a = 0;
+        this.gameObject.GetComponent<SpriteRenderer>().color=_color;
+
+        enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject enemy in enemies)
         {
-            enemy[i] = GameObject.Find("Enemy(Clone)");
             illust.transform.localScale = new Vector3(0.5f, 0.5f, 0) * StageGenerator.squareScale;
             defeat.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
-            transform.localScale = new Vector3(1, 1, 0) * StageGenerator.squareScale;
-            //Instantiate(illust, enemy[i].transform.position, Quaternion.identity);
-            defeatAnime= Instantiate(defeat, enemy[i].transform.position, Quaternion.identity)as GameObject;
+            Instantiate(illust, enemy.transform.position, Quaternion.identity);
+            Instantiate(defeat, enemy.transform.position, Quaternion.identity);
             Invoke("removeAnimation", 0.75f);
-            PlayerScript.enemyObjectnumber --;
-            Debug.Log(PlayerScript.enemyObjectnumber);
+            Destroy(enemy);
+            PlayerScript.enemyObjectnumber--;
+
+            //Color _color = enemy.GetComponent<SpriteRenderer>().color;
+            //_color.a = 0;
+            //enemy.GetComponent<SpriteRenderer>().color = _color;
 
         }
         Invoke("destroy", 1.0f);
-        for(int i=0; i < a; i++)
-        {
-            Destroy(enemy[i]);
-        }
+        defeatAnime = GameObject.FindGameObjectsWithTag("defeat");
     }
 
     // Update is called once per frame
@@ -46,6 +47,9 @@ public class ThunderScript : MonoBehaviour
     }
     void removeAnimation()
     {
-        Destroy(defeatAnime);
+        foreach (GameObject anime in defeatAnime)
+        {
+            Destroy(anime);
+        }
     }
 }

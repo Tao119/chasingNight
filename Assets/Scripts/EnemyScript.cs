@@ -192,7 +192,7 @@ public class EnemyScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         
-        if (other.gameObject.tag == "Player" && PlayerScript.isPlaying==true)
+        if (other.gameObject.tag == "Player" && PlayerScript.Damaging==false)
         {
             other.SendMessage("damaged");
             

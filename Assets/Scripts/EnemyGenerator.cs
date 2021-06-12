@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyGenerator : MonoBehaviour
 {
@@ -20,39 +21,47 @@ public class EnemyGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timer = 0;
+        timer = interval;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        Num = 0;
-        count = 0;
-        for (int i = 0; i < StageGenerator.lengthy; i++)
+        if (timer < 0)
         {
-            for (int j = 0; j < StageGenerator.lengthx; j++)
+            if (SceneManager.GetActiveScene().name != "BossStage")
             {
-                if (StageGenerator.location[i,j]==1)
+                Num = 0;
+                count = 0;
+                for (int i = 0; i < StageGenerator.lengthy; i++)
                 {
-                    if (isLighted[i, j] == false)
+                    for (int j = 0; j < StageGenerator.lengthx; j++)
                     {
-                        spawnableLocation[Num] = new Vector3(-j, -i, 0) * StageGenerator.squareScale + new Vector3(0, 0, -10);
+                        if (StageGenerator.location[i, j] == 1)
+                        {
+                            if (isLighted[i, j] == false)
+                            {
+                                if (PlayerScript.px != i || PlayerScript.py != j)
+                                {
+                                    spawnableLocation[Num] = new Vector3(-j, -i, 0) * StageGenerator.squareScale + new Vector3(0, 0, -10);
 
-                        Num++;
-                        count++;
+                                    Num++;
+                                    count++;
+                                }
+                            }
+                        }
                     }
                 }
             }
-        }
 
-        timer -= Time.deltaTime; 
-        if (timer < 0)
-        { 
-            Spawn(); 
+            Spawn();
             timer = interval;
-           // Debug.Log(isLighted[1,1]+","+isLighted[StageGenerator.lengthy-2, StageGenerator.lengthx-2]);
         }
+        timer -= Time.deltaTime; 
+        
+           // Debug.Log(isLighted[1,1]+","+isLighted[StageGenerator.lengthy-2, StageGenerator.lengthx-2]);
+        
             
 
 
@@ -60,7 +69,7 @@ public class EnemyGenerator : MonoBehaviour
     }
     void Spawn()
     {
-        if (count>0) {
+        if (count>0 && SceneManager.GetActiveScene().name != "BossStage") {
             randomNum = Random.Range(0, count);
             enemy.transform.localScale = new Vector3(StageGenerator.squareScale, StageGenerator.squareScale, 0);
             Instantiate(enemy, spawnableLocation[randomNum], Quaternion.identity);
