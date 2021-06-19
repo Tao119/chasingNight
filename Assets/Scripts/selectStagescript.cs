@@ -30,6 +30,7 @@ public class selectStagescript : MonoBehaviour
     string[] stageNames =
         {
         //    "DemoStage",
+        "Tutorial",
             "Stage1-1",
             "Stage1-2",
             "Stage1-3",
@@ -48,7 +49,7 @@ public class selectStagescript : MonoBehaviour
     public static bool[] isCleared=
         {
     //    false,
-        false,false,false,false,false,false,false,false,false,false,false
+        false,false,false,false,false,false,false,false,false,false,false,false
             //,false,false
         };
 

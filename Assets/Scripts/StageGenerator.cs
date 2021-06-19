@@ -141,6 +141,28 @@ public class StageGenerator : MonoBehaviour
                 };
                 HPLevel = 3;
                 break;
+            case "Tutorial":
+                stageLayout = new string[]{
+                    "00000",
+                    "01110",
+                    "01010",
+                    "01110",
+                    "00000"
+                };
+                lightSwitch = new Vector3[]{
+                    new Vector3(1,0.5f,0),
+            new Vector3(0.5f,3,0),
+                    new Vector3(3,3.5f,0),
+            new Vector3(3.5f,1,0),
+                };
+                switchManager = new Vector4[]{
+            new Vector4(1,3,1,2),
+            new Vector4(3,1,2,3),
+            new Vector4(1,3,3,2),
+            new Vector4(3,1,2,1),
+                };
+                HPLevel = 5;
+                break;
             case "Stage1-2":
                 stageLayout = new string[]{
                     "00000",
@@ -439,7 +461,7 @@ public class StageGenerator : MonoBehaviour
    
         lengthy = stageLayout.GetLength(0);
         lengthx = stageLayout[0].Length;
-        if (SceneManager.GetActiveScene().name != "BossStage")
+        if (SceneManager.GetActiveScene().name != "BossStage"&& SceneManager.GetActiveScene().name != "Tutorial")
         {
             enemyGenerator.SendMessage("setting");
         }
@@ -488,7 +510,7 @@ public class StageGenerator : MonoBehaviour
             switchObject1= Instantiate(switchObject, -1*lightSwitch[i] * squareScale + new Vector3(0, 0, -10), Quaternion.identity)as GameObject ;
             switchObject1.transform.localScale= new Vector3(squareScale/2, squareScale/2, 0);
         }
-        if (SceneManager.GetActiveScene().name != "BossStage")
+        if (SceneManager.GetActiveScene().name != "BossStage"&& SceneManager.GetActiveScene().name != "Tutorial")
         {
             enemyGenerator.SendMessage("countFloor");
         }

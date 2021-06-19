@@ -47,6 +47,6 @@ public class ActivateScript : MonoBehaviour
     }
     void loadNextScene()
     {
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("Tutorial");
     }
 }

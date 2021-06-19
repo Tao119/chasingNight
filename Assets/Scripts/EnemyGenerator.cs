@@ -45,7 +45,6 @@ public class EnemyGenerator : MonoBehaviour
                                 if (PlayerScript.px != i || PlayerScript.py != j)
                                 {
                                     spawnableLocation[Num] = new Vector3(-j, -i, 0) * StageGenerator.squareScale + new Vector3(0, 0, -10);
-
                                     Num++;
                                     count++;
                                 }
