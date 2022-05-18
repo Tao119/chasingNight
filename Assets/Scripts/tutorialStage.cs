@@ -21,14 +21,14 @@ public class tutorialStage : MonoBehaviour
     GameObject enemy1;
     bool itemtem;
     public GameObject[] items;
-    int count;
     // Start is called before the first frame update
     void Start()
     {
+         //幸せな時間を
+         //どれだけ過ごせるかは
         check = 0;
         rank = 0;
         isGenerated = false;
-        count = 0;
         itemtem = false;
     }
 
